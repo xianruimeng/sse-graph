@@ -1,0 +1,164 @@
+\documentclass[12pt]{article}
+\def\shownotes{1}
+
+\usepackage[top=3cm, bottom=3cm, left=2cm, right=2cm]{geometry}      % [top=2cm, bottom=2cm, left=2cm, right=2cm]
+\geometry{letterpaper}                   % ... or a4paper or a5paper or ... 
+%\geometry{landscape}                % Activate for for rotated page geometry
+ 
+\usepackage{graphicx}
+\usepackage{amssymb, amsmath, amsthm, amsfonts}
+\usepackage{enumerate}
+\usepackage{hyperref}
+\usepackage{xspace}
+\usepackage{graphicx}
+\usepackage{latexsym}
+\usepackage{color}
+\usepackage{framed}
+\usepackage{algpseudocode} 
+
+\usepackage{mathtools}
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+
+\usepackage[normalem]{ulem}
+%\usepackage{cancel}
+
+\newcommand{\red}[1]{\textcolor{red}{#1}} 
+
+
+\mathchardef\mhyphen="2D
+
+\ifnum\shownotes=1
+\newcommand{\authnote}[2]{{\textcolor{red}{\textsf{#1 notes: }\textcolor{blue}{ #2}}\marginpar{\textcolor{red}{\textbf{!!!!!}}}}}
+\else
+\newcommand{\authnote}[2]{}
+\fi
+\newcommand{\bnote}[1]{{\authnote{Ben}{#1}}}
+\newcommand{\lnote}[1]{{\authnote{Leo}{#1}}}
+\newcommand{\xnote}[1]{{\authnote{Xianrui}{#1}}}
+
+\newcommand{\class}[1]{{\ensuremath{\mathsf{#1}}}}
+
+\newcommand{\gen}{\ensuremath{\class{Gen}}\xspace}
+\newcommand{\rep}{\ensuremath{\class{Rep}}\xspace}
+
+\newcommand{\rec}{\ensuremath{\class{Rec}}\xspace}
+\newcommand{\enc}{\ensuremath{\class{Enc}}\xspace}
+\newcommand{\dec}{\ensuremath{\class{Dec}}\xspace}
+\newcommand{\prg}{\ensuremath{\class{prg}}\xspace}
+\newcommand{\zo}{\ensuremath{\{0, 1\}}}
+\newcommand{\vect}[1]{\ensuremath{\textbf{#1}}}
+\newcommand{\zq}{\ensuremath{\mathbb{Z}_q}}
+\newcommand{\Fq}{\ensuremath{\mathbb{F}_q}}
+\newcommand{\sample}{\ensuremath{\class{Sample}}\xspace}
+\newcommand{\neigh}{\ensuremath{\class{Neigh}}\xspace}
+\newcommand{\dis}{\ensuremath{\mathsf{dis}}}
+\newcommand{\decode}{\ensuremath{\mathsf{Decode}}}
+
+\newcommand{\ve}{\vect{e}}
+\newcommand{\vm}{\vect{m}}
+\newcommand{\vy}{\vect{y}}
+\newcommand{\vE}{\vect{E}}
+\newcommand{\vS}{\vect{S}}
+\newcommand{\vA}{\vect{A}}
+\newcommand{\vc}{\vect{c}}
+\newcommand{\vW}{\vect{W}}
+\newcommand{\vR}{\vect{R}}
+\newcommand{\vU}{\vect{U}}
+\newcommand{\vT}{\vect{T}}
+\newcommand{\vX}{\vect{X}}
+\newcommand{\vB}{\vect{B}}
+\newcommand{\vz}{\vect{z}}
+\newcommand{\vq}{\vect{q}}
+\newcommand{\vd}{\vect{d}}
+\newcommand{\vs}{\vect{s}}
+\newcommand{\vx}{\vect{x}}
+\newcommand{\va}{\vect{a}}
+\newcommand{\vb}{\vect{b}}
+\newcommand{\vgamma}{\mathbf{\Gamma}}
+\newcommand{\vt}{\vect{t}}
+\newcommand{\vu}{\vect{u}}
+\newcommand{\vF}{\vect{F}}
+\newcommand{\recout}{x}
+\newcommand{\ignore}[1]{}
+
+
+\newcommand{\F}[1]{\mathcal{F}_{\textbf{#1}}}
+\newcommand{\A}{\mathcal{A}}
+\renewcommand{\L}{\mathcal{L}}
+\renewcommand{\S}{\mathcal{S}}
+\renewcommand{\O}{\mathcal{O}}
+
+
+\newcommand{\search}{\class{Search}}
+\newcommand{\getrind}{\class{GetRind}}
+\newcommand{\edbsetup}{\class{EDBSetup}}
+\newcommand{\token}{\class{Token}}
+\newcommand{\SSEEnc}{\class{SSEEnc}}
+\newcommand{\SSEToken}{\class{Token}}
+\newcommand{\Search}{\class{Search}}
+
+
+\newcommand{\Tsetsetup}{\class{TSetSetup}}
+\newcommand{\Tsetgettag}{\class{TSetGetTag}}
+\newcommand{\Tsetretrieve}{\class{TSetRetrieve}}
+\newcommand{\W}{\class{W}}
+\newcommand{\stag}{\class{stag}}
+\newcommand{\xtag}{\class{xtag}}
+\newcommand{\xind}{\class{xind}}
+\newcommand{\xtoken}{\class{xtoken}}
+\newcommand{\xtrap}{\class{xtrap}}
+\newcommand{\Tset}{\class{TSet}}
+\newcommand{\Xset}{\class{XSet}}
+\newcommand{\edb}{\class{EDB}}
+\newcommand{\db}{\class{DB}}
+\newcommand{\sketch}{\ensuremath{\class{Sketch}}\xspace}
+
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{assumption}[theorem]{Assumption}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{problem}[theorem]{Problem}
+\newtheorem{construction}[theorem]{Construction}
+
+
+\newcommand{\ind}{\class{ind}}
+\newcommand{\rind}{\class{rind}}
+
+\begin{document}
+
+\begin{itemize}
+\item $\SSEEnc(K, G)$:
+\begin{enumerate}
+\item $G = (V, E)$, for each $u \in V$. Let $r = \lfloor \log V\rfloor$.\\
+Sample $r + 1$ many sets of sizes $1, 2, 2^2, ..., 2^r$ respectively. In each set, the samples are chosen uniformly at random from all nodes. Call these sets $S_0, ..., S_r$. 
+\item For each node $u\in V$. 
+\begin{enumerate}
+\item First compute $\kappa_u \leftarrow f_{k_1}(u)$.
+\item For all these sets $S_i$, compute $(w_i, \delta_i)$, where $w_i$ is the closest node to $u$ in $S_i$, i.e. $\delta_i = d(u, w_i) = argmin_{v\in S_i}d(u, v)$.
+\item Compute $\kappa_{w_i} \leftarrow f_{k_2}(w_i)$, $\kappa_{u}' \leftarrow f_{k_3}(u)$,$tag_i \leftarrow g^{\kappa_{w_i} \cdot \kappa_u'^{-1}}$, $c^u_i \leftarrow Enc_{K_e}(\delta_i)$. \\
+Store $\Tset[u] = ((tag_1, c^u_1), ..., (tag_r, c^u_r))$
+\end{enumerate}
+\item Repeat step (2) $k$ many times. Each time sampling independently at random. Union the $\Tset[u]$ each run of step (2).
+\end{enumerate}
+
+\item $\token(K, u, v)$: $t_{u1} \leftarrow f_{k_1}(u)$, $t_{v1} \leftarrow f_{k_1}(v)$, $t_{u2} \leftarrow f_{k_3}(u)$, $t_{v2} \leftarrow f_{k_3}(v)$.\\
+Output $t = (t_{u1}, t_{v1}, t_{u2}, t_{v2})$.\\
+
+
+\item $\search(t, C)$: (Note: this is NOT Bourgain's query)
+\begin{enumerate}
+\item Parse $t$ as $(t_{u1}, t_{v1}, t_{u2}, t_{v2})$.
+\item Search for $\sketch[t_{u1}] = \vt = \{\alpha^u_i, \beta^u_i\}$ and $\sketch[t_{v1}] = \vt = \{\alpha^v_i, \beta^v_i\}$.\\
+For each $\alpha_i^u$, compute $w_u^i = (\alpha_i^u)^{t_{u2}}$. For each $\alpha_i^v$, compute $w_v^i = (\alpha_i^v)^{t_{v2}}$
+\item Test the common elements in for the set $\{w_u^i\}$ and $\{w_v^i\}$, and retrieve the corresponding $\beta^u_i$ $\beta^v_j$, and compute  $\delta_k = \beta^u_i \beta^v_j$. 
+\end{enumerate}
+
+\item $\dec(K, \vc)$: Decrypt the $\dec_{K_e}(\delta_k)$ received from the server, and get the minimum one.
+\end{itemize}
+\end{document}
+
